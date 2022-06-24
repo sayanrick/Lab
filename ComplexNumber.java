@@ -1,14 +1,18 @@
 import java.util.Scanner;
 
 public class ComplexNumber {
+    // variable to hold real and imaginary part of complex number
     int real, imaginary;
+    // Constructor which will be used while creating complex number
     public ComplexNumber(int r, int i){
         this.real = r;
         this.imaginary = i;
     }
+    // this ShowNum function is to print real number
     public void ShowNum(){
         System.out.println(this.real + " +i" + this.imaginary);
     }
+    // function for addition
     public static ComplexNumber add(ComplexNumber num1, ComplexNumber num2){
         ComplexNumber res = new ComplexNumber(0, 0);
         //adding real part
