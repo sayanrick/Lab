@@ -8,7 +8,7 @@ public class Book {
 	private float price;
 	// Declaring parameterized constructor
 	public Book(String bookId, String title, String author, String category, float price) {
-		super();
+		// If Validation fails then it will throw a custom exception called InvalidBookException
 		try {
 			if((bookId.startsWith("B")) && (bookId.length()<=4)) {
 				this.bookId = bookId;
@@ -70,7 +70,6 @@ public class Book {
 	}
 
 	public void setCategory(String category) {
-		//		if(this.category.co))
 		this.category = category;
 	}
 
@@ -92,6 +91,7 @@ public class Book {
 
 
 }
+// Custom Exception
 class InvalidBookException extends Exception {
 	public InvalidBookException(String s) {
 		super(s);
