@@ -15,6 +15,7 @@ public class EmployeeUploader {
 		System.out.println("Press 1 to enter data in Department table..");
 		System.out.println("Press 2 to enter data in Employee table..");
 		System.out.println("Press 3 to retrieve employee details..");
+		System.out.println("Press 4 to calculate PF");
 		int c = Integer.parseInt(br.readLine());
 		if(c==1) {
 			storeDepartmentDetails();
@@ -27,6 +28,9 @@ public class EmployeeUploader {
 			System.out.println("Enter Employee ID:- ");
 			long eID = Long.parseLong(br.readLine());
 			retrieveEmployeeDetails(eID);
+		}
+		else if(c==4) {
+			calculatePF();
 		}
 
 	}
@@ -127,6 +131,39 @@ public class EmployeeUploader {
 		} catch(Exception e) {
 
 		}
+	}
+	
+	public static void calculatePF() {
+		 try {
+			 
+			 System.out.println("CALCULATING PF");
+			 Class.forName("com.mysql.cj.jdbc.Driver"); // register driver
+				// connection driver manager
+				Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project", "root", "SAYANdas1@");
+				Statement stm=conn.createStatement();//creating statement
+				BufferedReader brr = new BufferedReader(new InputStreamReader(System.in));
+				System.out.println("Enter Employee ID:- ");
+				long Employee_id = Long.parseLong(brr.readLine());
+
+				ResultSet rs=stm.executeQuery("select * from Employee where Employee_id="+Employee_id);
+				while(rs.next()) {
+					System.out.println("Employee_salary:"+rs.getLong(4));
+					if(rs.getDouble(4)>1000 && rs.getDouble(4)<10000) {
+			System.out.println("PF Ammount is:"+(rs.getDouble(4)*5/100));
+					}
+					if(rs.getDouble(4)>10000 && rs.getDouble(4)<100000) {
+						System.out.println("PF Ammount is:"+(rs.getDouble(4)*6/100));
+								}
+					if(rs.getDouble(4)>100000) {
+						System.out.println("PF Ammount is:"+(rs.getDouble(4)*7/100));
+								}
+				}
+				rs.close();
+
+					}
+					catch(Exception e) {
+						System.out.println(e);
+					}
 	}
 
 }
